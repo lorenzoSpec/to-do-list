@@ -1,4 +1,9 @@
-let prevData = localStorage.getItem('toDoList');
+let prevData = '';
+
+if(localStorage.getItem('toDoList')){
+    prevData = localStorage.getItem('toDoList');
+}
+
 let arrPD = [];
 
 if(prevData === ''){
