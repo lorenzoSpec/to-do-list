@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List | Make your day productive and awesome</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="https://kit.fontawesome.com/e93a3a423a.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header id='header'>
+        <h1>To Do List</h1>
+        <button id='reset-btn'>Reset</button>
+    </header>
+    <section id='main-content'>
+        <section id='to-do-items'>
+            <p id='instruction'>Add Item...</p>
+        </section>
+        <!--<section id='checked-items'>
+            <h2>Finished Item</h2>
+        </section>-->
+        <button id='add-btn'>
+            <i class="fas fa-plus"></i>
+        </button>
+    </section>
+    <section id='utilities'>
+        <section id="dark-bg" class='dark-bg-i'></section>
+        <section id='type-text-window' class="type-text-window-i">
+            <h3>Type an item</h3>
+            <input type="text" name="to-do-item" id="to-do-item"/>
+            <button id='add'>Add</button>
+            <button id='cancel'>Cancel</button>
+        </section>
+    </section>
+    <script src="index.js"></script>
+</body>
+</html>

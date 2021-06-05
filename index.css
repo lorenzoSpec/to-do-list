@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css2?family=Della+Respira&family=Montserrat:ital@1&family=Nunito&family=Poppins&family=Ubuntu&display=swap');
+
+* {
+    box-sizing: border-box;
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/*   HEADER STYLES   */
+
+#header {
+    width: 100%;
+    height: 60px;
+    background-color: #267356;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: grid;
+    grid-template-columns: 80% 20%;
+}
+
+#header h1{
+    color: white;
+    font-family: poppins;
+    font-size: 30px;
+    font-weight: 900;
+    margin-left: 20px;
+    grid-area: 0 / 1;
+    align-self: center;
+}
+
+#header button {
+    background-color: #1C4D3A;
+    color: white;
+    font-size: 15px;
+    font-family: 'Poppins';
+    font-weight: bold;
+    grid-area: 1 / 2;
+    justify-self: end;
+    align-self: center;
+    margin-right: 20px;
+    padding: 6px 17px;
+    border: none;
+}
+
+/*   TO DO MAIN CONTENT STYLES   */
+#to-do-items{
+    max-width: 800px;
+    margin: 100px auto;
+}
+
+.item-cont {
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #ebe9e9;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+    border-radius: 10px;
+}
+
+.text-div {
+    width: 90%;
+    height: 100%;
+}
+
+#text-p {
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+    opacity: 1;
+}
+
+.icon-div {
+    width: 10%;
+    height: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.v {
+    opacity: 0;
+    font-size: 20px;
+    transition: all 0.19s linear;
+}
+
+.item-cont:hover .v {
+    opacity: 1;
+    font-size: 18px;
+}
+
+.icon-div i:first-child {
+    color: #267356;
+}
+
+.icon-div i:last-child {
+    color: #1C4D3A;
+}
+
+#instruction {
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+    display: block;
+    margin-left: 30px;
+    text-align: center;
+}
+
+#checked-items{
+    max-width: 800px;
+    margin: 100px auto;
+}
+
+#checked-items h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 25px;
+    font-weight: normal;
+}
+
+/*   TO DO ADD BUTTON STYLE   */
+#add-btn {
+    width: 50px;
+    height: 50px;
+    background-color: #267356;
+    color: white;
+    font-size: 30px;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: none;
+}
+
+/*   UTILITIES   */
+
+.dark-bg-i, .type-text-window-i  {
+    display: none;
+    
+}
+
+.dark-bg-v {
+    width: 100%;
+    height: 100vh;
+    background-color: #267356;
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 0.5;
+    z-index: 1000;
+    display: block;
+}
+
+/*Type Text/Item Name Window*/
+.type-text-window-v {
+    width: 500px;
+    height: 200px;
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    z-index: 1001;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+.type-text-window-v h3{
+    font-weight: normal;
+    font-family: 'Poppins';
+    margin: 30px;
+}
+
+#to-do-item {
+    background-color: #CECECE;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 25px;
+    padding: 5px 25px;
+    border: none;
+}
+
+
+.type-text-window-v button{
+    font-family: 'Poppins', sans-serif;
+    font-family: 16px;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+.type-text-window-v #add{
+    background-color: #267356;
+    color: white;
+    position: absolute;
+    bottom: 15px;
+    right: 100px;
+}
+
+.type-text-window-v #cancel{
+    background-color: #CECECE;
+    color: black;
+    position: absolute;
+    bottom: 15px;
+    right: 20px;
+}
