@@ -1,3 +1,4 @@
+/*====================   MESSY WAY TO GET DATA FROM LOCAL STORAGE   ====================*/
 let prevData = '';
 
 if(localStorage.getItem('toDoList')){
@@ -35,6 +36,8 @@ const cancel = document.getElementById('cancel');
 const toDoItemsDOM = document.getElementById('to-do-items');
 const instruction = document.getElementById('instruction');
 
+let darkBgStatus = true;
+
 
 /*====================   Functions for Interactivity   ====================*/
 
@@ -47,7 +50,8 @@ if(twoDAPD.length > 0){
 } 
 
 /* Reset button to delete the data in local storage */
-function resetFunc() {
+function resetFunc(){
+    showDarkBg();
     localStorage.setItem('toDoList', '');
     location.reload();
 }
@@ -64,6 +68,27 @@ function addItemToArr(){
     hideTypeWindow();
     storage();
     createItems(intVal);
+}
+
+/* Shortcut for adding item with Enter Key */
+function enterPressed(e){
+    if(e.code === 'Enter'){
+        addItemToArr();
+    }
+}
+
+/* Shortcut to show typewindow with A Key */
+function aPressedForAdd(e){
+    if(e.code === 'KeyA'){
+        showTypeWindow();
+    }
+}
+
+/* Shortcut to reset the items with R Key */
+function rPressedForReset(e){
+    if(e.code === 'KeyR' && darkBgStatus){
+        resetFunc();
+    }
 }
 
 /* function that create item with the item name and the icons */
@@ -107,6 +132,7 @@ function showTypeWindow(){
     typeTextWindow.classList.add('type-text-window-v');
     toDoInput.focus();
     showDarkBg();
+
 }
 
 /* Hide the element that that popping up when plus icon is clicked  */
@@ -119,14 +145,19 @@ function hideTypeWindow(){
 /* Show the element that darken the screen for windows  */
 function showDarkBg(){
     darkBg.classList.add('dark-bg-v');
+    darkBgStatus = false;
 }
 
 /* Hide the element that darken the screen for windows  */
 function hideDarkBg(){
     darkBg.classList.remove('dark-bg-v');
+    darkBgStatus = true;
 }
 
 /*====================   Event Listeners   ====================*/
+document.addEventListener('keypress', rPressedForReset);
+document.addEventListener('keyup', aPressedForAdd);
+typeTextWindow.addEventListener('keyup', enterPressed);
 resetBtn.addEventListener('click', resetFunc);
 addBtn.addEventListener('click', showTypeWindow);
 darkBg.addEventListener('click', hideTypeWindow);
