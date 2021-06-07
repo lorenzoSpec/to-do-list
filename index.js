@@ -1,7 +1,5 @@
 /*
     *const checkedSection = document.getElementById('checked-items');
-    * 
-
  */
 
 /*========================================   MESSY WAY TO GET DATA FROM LOCAL STORAGE   ==============================*/
@@ -59,7 +57,7 @@ function renderToDoItems(){
     if(twoDAPD.length > 0){
         for(let i = 0; i < twoDAPD.length; i++){
             if(twoDAPD[i][1] === 'true'){
-                createItems(twoDAPD[i][0], i);
+                createItems(twoDAPD[i][0]);
             }
         }
     } 
@@ -78,7 +76,7 @@ function addItemToArr(){
 }
 
 /* function that create item with the item name and the icons */
-function createItems(textNameItem, id){
+function createItems(textNameItem){
    
     let cont = document.createElement('div');
     let textDiv = document.createElement('div');
@@ -97,7 +95,6 @@ function createItems(textNameItem, id){
 
     iconDiv.setAttribute('class', 'icon-div');
     checkI.setAttribute('class', 'fas fa-check v');
-    checkI.setAttribute('id', 'check'+id);
     trashI.setAttribute('class', 'fas fa-trash v');
     iconDiv.appendChild(checkI);
     iconDiv.appendChild(trashI);
@@ -122,15 +119,16 @@ function renderChecked(i){
 }
 
 /* Make the item checked as false */
-function checkedItemJustNow(index){
-    twoDAPD[index][1] = 'false';
+function checkedItemJustNow(id){
+    twoDAPD.map(x => x[0] === id? x[1] = 'false' : x[0]);
     storage();
 }
 
 /* Add event listeners for check icons */
 function eventsForCheck(){
     for(let i = 0; i < checkIcons.length; i++){
-        checkIcons[i].addEventListener('click', function(){renderChecked(i)});
+        let itemIdentity = checkIcons[i].parentNode.previousSibling.firstChild.textContent;
+        checkIcons[i].addEventListener('click', function(){renderChecked(itemIdentity)});
     }
 };
 eventsForCheck();
