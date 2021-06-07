@@ -1,4 +1,10 @@
-/*====================   MESSY WAY TO GET DATA FROM LOCAL STORAGE   ====================*/
+/*
+    *const checkedSection = document.getElementById('checked-items');
+    * 
+
+ */
+
+/*========================================   MESSY WAY TO GET DATA FROM LOCAL STORAGE   ==============================*/
 let prevData = '';
 
 if(localStorage.getItem('toDoList')){
@@ -19,8 +25,15 @@ let twoDAPD = [];
 for(let i = 0; i < until; i = i+2){
     twoDAPD.push(arrPD.slice(i, i+2));
 }
+console.log(28, twoDAPD);
+/*=======================================   GLOBAL VARIABLES   ==============================================*/
 
-/*====================   Global Variables   ====================*/
+
+let checkIcons;
+if(document.getElementsByClassName('fa-check')){
+    checkIcons = document.getElementsByClassName('fa-check');
+}
+
 const checkedItems = [];
 
 const addBtn = document.getElementById('add-btn');
@@ -39,15 +52,91 @@ const instruction = document.getElementById('instruction');
 let darkBgStatus = true;
 
 
-/*====================   Functions for Interactivity   ====================*/
+/*========================================   RENDER ITEMS IN toDoItemsDOM  ========================================*/
 
 /*  Start the list if the storage have data */
-if(twoDAPD.length > 0){
-    for(let i = 0; i < twoDAPD.length; i++){
-        createItems(twoDAPD[i][0]);
+function renderToDoItems(){
+    if(twoDAPD.length > 0){
+        for(let i = 0; i < twoDAPD.length; i++){
+            if(twoDAPD[i][1] === 'true'){
+                createItems(twoDAPD[i][0], i);
+            }
+        }
+    } 
+} renderToDoItems();
+
+
+/* Add the added item into array toDoItems  */
+function addItemToArr(){
+    let intVal = toDoInput.value;
+    twoDAPD.push([intVal, true]);
+
+    hideTypeWindow();
+    storage();
+    createItems(intVal);
+    eventsForCheck();
+}
+
+/* function that create item with the item name and the icons */
+function createItems(textNameItem, id){
+   
+    let cont = document.createElement('div');
+    let textDiv = document.createElement('div');
+    let pEl = document.createElement('p');
+    let text = document.createTextNode(textNameItem);
+    let iconDiv = document.createElement('div');
+    let checkI = document.createElement('i');
+    let trashI = document.createElement('i');
+
+    cont.setAttribute('class', 'item-cont');
+
+    textDiv.setAttribute('class', 'text-div');
+    pEl.setAttribute('id', 'text-p');
+    textDiv.appendChild(pEl);
+    pEl.appendChild(text);
+
+    iconDiv.setAttribute('class', 'icon-div');
+    checkI.setAttribute('class', 'fas fa-check v');
+    checkI.setAttribute('id', 'check'+id);
+    trashI.setAttribute('class', 'fas fa-trash v');
+    iconDiv.appendChild(checkI);
+    iconDiv.appendChild(trashI);
+
+    cont.appendChild(textDiv);
+    cont.appendChild(iconDiv);
+
+    toDoItemsDOM.appendChild(cont);
+}
+
+/*====================================  RENDER ITEMS THAT ARE CHECKED ======================================*/
+
+
+/* Render the checked items */
+function renderChecked(i){
+    checkedItemJustNow(i);
+    
+
+    const checkedSection = document.getElementById('checked-items');
+    checkedSection.classList.remove('checked-items-i');
+    checkedSection.classList.add('checked-items-v');
+}
+
+/* Make the item checked as false */
+function checkedItemJustNow(index){
+    twoDAPD[index][1] = 'false';
+    storage();
+}
+
+/* Add event listeners for check icons */
+function eventsForCheck(){
+    for(let i = 0; i < checkIcons.length; i++){
+        checkIcons[i].addEventListener('click', function(){renderChecked(i)});
     }
-    toDoItemsDOM.removeChild(instruction);
-} 
+};
+eventsForCheck();
+
+
+/*=========================================   RESET AND STORAGE ======================================*/
 
 /* Reset button to delete the data in local storage */
 function resetFunc(){
@@ -56,19 +145,14 @@ function resetFunc(){
     location.reload();
 }
 
-/* Add the added item into array toDoItems  */
-function addItemToArr(){
-    if(twoDAPD.length === 0){
-        toDoItemsDOM.removeChild(instruction);
-    }
-
-    let intVal = toDoInput.value;
-    twoDAPD.push([intVal, true]);
-
-    hideTypeWindow();
-    storage();
-    createItems(intVal);
+/* Get  and Set data from local storage */
+function storage(){
+    localStorage.setItem('toDoList', twoDAPD);
+    localStorage.getItem('toDoList');
 }
+
+/*========================================   KEYBOARD SHORTCUTS  ========================================*/
+
 
 /* Shortcut for adding item with Enter Key */
 function enterPressed(e){
@@ -91,41 +175,9 @@ function rPressedForReset(e){
     }
 }
 
-/* function that create item with the item name and the icons */
-function createItems(textNameItem){
-   
-        let cont = document.createElement('div');
-        let textDiv = document.createElement('div');
-        let pEl = document.createElement('p');
-        let text = document.createTextNode(textNameItem);
-        let iconDiv = document.createElement('div');
-        let checkI = document.createElement('i');
-        let trashI = document.createElement('i');
 
-        cont.setAttribute('class', 'item-cont');
+/*========================================   SHOW AND HIDE WINDOWS  ========================================*/
 
-        textDiv.setAttribute('class', 'text-div');
-        pEl.setAttribute('id', 'text-p');
-        textDiv.appendChild(pEl);
-        pEl.appendChild(text);
-
-        iconDiv.setAttribute('class', 'icon-div');
-        checkI.setAttribute('class', 'fas fa-check v');
-        trashI.setAttribute('class', 'fas fa-trash v');
-        iconDiv.appendChild(checkI);
-        iconDiv.appendChild(trashI);
-
-        cont.appendChild(textDiv);
-        cont.appendChild(iconDiv);
-    
-        toDoItemsDOM.appendChild(cont);
-}
-
-/* Get  and Set data from local storage */
-function storage(){
-    localStorage.setItem('toDoList', twoDAPD);
-    localStorage.getItem('toDoList');
-}
 
 /* Show the element that that popping up when plus icon is clicked  */
 function showTypeWindow(){
@@ -154,7 +206,10 @@ function hideDarkBg(){
     darkBgStatus = true;
 }
 
-/*====================   Event Listeners   ====================*/
+/*====================================   EVENT LISTENERS  =============================================*/
+
+
+
 document.addEventListener('keypress', rPressedForReset);
 document.addEventListener('keyup', aPressedForAdd);
 typeTextWindow.addEventListener('keyup', enterPressed);
