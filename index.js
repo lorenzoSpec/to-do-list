@@ -24,10 +24,13 @@ for(let i = 0; i < until; i = i+2){
     twoDAPD.push(arrPD.slice(i, i+2));
 }
 console.log(28, twoDAPD);
+
 /*=======================================   GLOBAL VARIABLES   ==============================================*/
 
-
-
+let checkIcons;
+if(document.getElementsByClassName('fa-check')){
+    checkIcons = document.getElementsByClassName('fa-check');
+}
 
 const checkedItems = [];
 
@@ -88,7 +91,6 @@ function addItemToArr(){
     hideTypeWindow();
     storage();
     createItems(intVal);
-    eventsForCheck();
 }
 
 /* function that create item with the item name and the icons */
@@ -118,6 +120,8 @@ function createItems(textNameItem){
     cont.appendChild(textDiv);
     cont.appendChild(iconDiv);
 
+    checkI.addEventListener('click', function(){renderChecked(textNameItem)});
+
     toDoItemsDOM.appendChild(cont);
 }
 
@@ -141,7 +145,7 @@ function renderChecked(i){
     checkedItemJustNow(i);
     showChkSection();
     createCkeckedItms(i);
-    //removeOnToDo(i);
+    removeOnToDo(i);
 }
 
 /* Show the Check Items Section */
@@ -181,35 +185,23 @@ function createCkeckedItms(chkNameItem){
     cont.appendChild(textDiv);
     cont.appendChild(iconDiv);
 
+    //undo.addEventListener('click', x);
+
     checkedSection.appendChild(cont);
 }
 
-/*function removeOnToDo(item){
+function removeOnToDo(item){
     let tb = document.getElementsByClassName('tb');
     for(let i = 0; i < tb.length; i++){
         if(tb[i].firstChild.firstChild.textContent === item){
             toDoItemsDOM.removeChild(tb[i]);
         }
     }
-}*/
-
-
-
-/* Add event listeners for check icons */
-let checkIcons;
-if(document.getElementsByClassName('fa-check')){
-    checkIcons = document.getElementsByClassName('fa-check');
 }
 
-function eventsForCheck(){
-    for(let i = 0; i < checkIcons.length; i++){
-        let itemIdentity = checkIcons[i].parentNode.previousSibling.firstChild.textContent;
-        checkIcons[i].addEventListener('click', function(){renderChecked(itemIdentity)});
-    }
-};
-eventsForCheck();
+/*function uncheckIt(){
 
-
+}*/
 
 /*=========================================   RESET AND STORAGE ======================================*/
 
