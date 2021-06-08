@@ -24,8 +24,8 @@ for(let i = 0; i < until; i = i+2){
     twoDAPD.push(arrPD.slice(i, i+2));
 }
 console.log(28, twoDAPD);
-/*=======================================   GLOBAL VARIABLES   ==============================================*/
 
+/*=======================================   GLOBAL VARIABLES   ==============================================*/
 
 let checkIcons;
 if(document.getElementsByClassName('fa-check')){
@@ -47,8 +47,34 @@ const cancel = document.getElementById('cancel');
 const toDoItemsDOM = document.getElementById('to-do-items');
 const instruction = document.getElementById('instruction');
 
+const checkedSection = document.getElementById('checked-items');
+
+const sureToDelete = document.getElementById("sure-to-delete");
+const toDeleteH3 = document.getElementById('to-delete-h3');
+const confirm = document.getElementById('confirm');
+const cancelDelete = document.getElementById('cancel-delete');
+
+const restoreSection = document.getElementById('restore');
+
 let darkBgStatus = true;
 
+/*========================================   FUNCTION FOR CREATING ELEMENT  ========================================*/
+
+function createDiv(){
+    return document.createElement('div');
+}
+
+function createP(){
+    return document.createElement('p');
+}
+
+function createTxtNd(text){
+    return document.createTextNode(text);
+}
+
+function createI(){
+    return document.createElement('i');
+}
 
 /*========================================   RENDER ITEMS IN toDoItemsDOM  ========================================*/
 
@@ -72,24 +98,23 @@ function addItemToArr(){
     hideTypeWindow();
     storage();
     createItems(intVal);
-    eventsForCheck();
 }
 
 /* function that create item with the item name and the icons */
 function createItems(textNameItem){
    
-    let cont = document.createElement('div');
-    let textDiv = document.createElement('div');
-    let pEl = document.createElement('p');
-    let text = document.createTextNode(textNameItem);
-    let iconDiv = document.createElement('div');
-    let checkI = document.createElement('i');
-    let trashI = document.createElement('i');
+    let cont = createDiv();
+    let textDiv = createDiv();
+    let pEl = createP();
+    let text = createTxtNd(textNameItem);
+    let iconDiv = createDiv();
+    let checkI = createI();
+    let trashI = createI();
 
-    cont.setAttribute('class', 'item-cont');
+    cont.setAttribute('class', 'item-cont tb');
 
     textDiv.setAttribute('class', 'text-div');
-    pEl.setAttribute('id', 'text-p');
+    pEl.setAttribute('class', 'text-p');
     textDiv.appendChild(pEl);
     pEl.appendChild(text);
 
@@ -102,21 +127,41 @@ function createItems(textNameItem){
     cont.appendChild(textDiv);
     cont.appendChild(iconDiv);
 
+    checkI.addEventListener('click', function(){renderChecked(textNameItem)});
+    trashI.addEventListener('click', function(){deleteItem(textNameItem)});
+
     toDoItemsDOM.appendChild(cont);
 }
 
+
 /*====================================  RENDER ITEMS THAT ARE CHECKED ======================================*/
 
+/* First Onload if there are items that are checked */
+function onloadRenderChk(){
+    if(twoDAPD.length > 0){
+        showChkSection();
+        for(let i = 0; i < twoDAPD.length; i++){
+            if(twoDAPD[i][1] === 'false'){
+                createCkeckedItms(twoDAPD[i][0]);
+            }
+        }
+    } 
+} onloadRenderChk();
 
 /* Render the checked items */
 function renderChecked(i){
     checkedItemJustNow(i);
-    
+    showChkSection();
+    createCkeckedItms(i);
+    removeOnToDo(i);
+}
 
-    const checkedSection = document.getElementById('checked-items');
+/* Show the Check Items Section */
+function showChkSection(){
     checkedSection.classList.remove('checked-items-i');
     checkedSection.classList.add('checked-items-v');
 }
+
 
 /* Make the item checked as false */
 function checkedItemJustNow(id){
@@ -124,15 +169,128 @@ function checkedItemJustNow(id){
     storage();
 }
 
-/* Add event listeners for check icons */
-function eventsForCheck(){
-    for(let i = 0; i < checkIcons.length; i++){
-        let itemIdentity = checkIcons[i].parentNode.previousSibling.firstChild.textContent;
-        checkIcons[i].addEventListener('click', function(){renderChecked(itemIdentity)});
-    }
-};
-eventsForCheck();
+/* create items for check item */
+function createCkeckedItms(chkNameItem){
+    let cont = createDiv();
+    let textDiv = createDiv();
+    let pEl = createP();
+    let text = createTxtNd(chkNameItem);
+    let iconDiv = createDiv();
+    let undo = createI();
 
+    cont.setAttribute('class', 'item-cont chk-blur');
+
+    textDiv.setAttribute('class', 'text-div');
+    pEl.setAttribute('class', 'text-p');
+    textDiv.appendChild(pEl);
+    pEl.appendChild(text);
+
+    iconDiv.setAttribute('class', 'chk-icon-div');
+    undo.setAttribute('class', 'fas fa-undo v');
+    iconDiv.appendChild(undo);
+
+    cont.appendChild(textDiv);
+    cont.appendChild(iconDiv);
+
+    undo.addEventListener('click', function(){uncheckIt(chkNameItem)});
+
+    checkedSection.appendChild(cont);
+}
+
+function removeOnToDo(item){
+    let tb = document.getElementsByClassName('tb');
+    for(let i = 0; i < tb.length; i++){
+        if(tb[i].firstChild.firstChild.textContent === item){
+            toDoItemsDOM.removeChild(tb[i]);
+        }
+    }
+}
+
+/*=========================================   UNCHECK ITEM ======================================*/
+
+let chkedItms = document.getElementsByClassName("chk-blur");
+
+/* Function for unchecking item */
+function uncheckIt(text){
+    uncheckedItem(text);
+    removeOnChkSection(text);
+    createItems(text);
+
+    if(chkedItms.length === 0){
+        hideChkSection();
+    }
+}
+
+/* hide the Check Items Section */
+function hideChkSection(){
+    checkedSection.classList.remove('checked-items-v');
+    checkedSection.classList.add('checked-items-i');
+}
+if(chkedItms.length === 0){
+    hideChkSection();
+}
+
+/* Make the item unchecked as true */
+function uncheckedItem(text){
+    twoDAPD.map(x => x[0] === text ? x[1] = 'true' : x[0]);
+    storage();
+}
+
+/* Remove checked item beacuse they are unchecked */
+function removeOnChkSection(item){
+    let chkBlur = document.getElementsByClassName('chk-blur');
+    for(let i = 0; i < chkBlur.length; i++){
+        if(chkBlur[i].firstChild.firstChild.textContent === item){
+            checkedSection.removeChild(chkBlur[i]);
+        }
+    }
+}
+
+/*=========================================   DELETE ITEM ======================================*/
+
+function deleteItem(itemName){
+    showSureToDelete(itemName);
+}
+
+function dltIt(itemName){
+    let tbd = document.getElementsByClassName('tb');
+    for(let i = 0; i < tbd.length; i++){
+        if(tbd[i].firstChild.firstChild.textContent === itemName){
+            toDoItemsDOM.removeChild(tbd[i]);
+        }
+    }
+}
+
+function showSureToDelete(text){
+    sureToDelete.classList.remove('sure-to-delete-i');
+    sureToDelete.classList.add('sure-to-delete-v');
+    toDeleteH3.textContent = 'Are you sure to delete ' + '"' + text + '"';
+    confirm.addEventListener('click', function(){showRestore(text)});
+    showDarkBg();
+}
+
+function hideSureToDelete(){
+    sureToDelete.classList.remove('sure-to-delete-v');
+    sureToDelete.classList.add('sure-to-delete-i');
+    hideDarkBg();
+}
+
+function showRestore(text){
+    restoreSection.classList.remove('restore-i');
+    restoreSection.classList.add('restore-v');
+    hideSureToDelete();
+    setTimeout(function(){hideRestore(text)}, 3000);
+}
+
+function hideRestore(text){
+    restoreSection.classList.remove('restore-v');
+    restoreSection.classList.add('restore-i');
+    dltIt(text);
+}
+
+
+darkBg.addEventListener('click', hideSureToDelete);
+cancelDelete.addEventListener('click', hideSureToDelete);
 
 /*=========================================   RESET AND STORAGE ======================================*/
 
@@ -146,7 +304,7 @@ function resetFunc(){
 /* Get  and Set data from local storage */
 function storage(){
     localStorage.setItem('toDoList', twoDAPD);
-    localStorage.getItem('toDoList');
+    //localStorage.getItem('toDoList');
 }
 
 /*========================================   KEYBOARD SHORTCUTS  ========================================*/
@@ -205,9 +363,6 @@ function hideDarkBg(){
 }
 
 /*====================================   EVENT LISTENERS  =============================================*/
-
-
-
 document.addEventListener('keypress', rPressedForReset);
 document.addEventListener('keyup', aPressedForAdd);
 typeTextWindow.addEventListener('keyup', enterPressed);

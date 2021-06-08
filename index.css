@@ -18,6 +18,7 @@
     left: 0;
     display: grid;
     grid-template-columns: 80% 20%;
+    z-index: 1000000000;
 }
 
 #header h1{
@@ -67,7 +68,7 @@
     height: 100%;
 }
 
-#text-p {
+.text-p {
     font-size: 18px;
     font-family: 'Poppins', sans-serif;
     opacity: 1;
@@ -109,6 +110,8 @@
     text-align: center;
 }
 
+/* CHECKED ITEMS STYLES  */
+
 .checked-items-v {
     max-width: 800px;
     margin: 100px auto;
@@ -128,6 +131,23 @@
 .checked-items-i h2 {
     font-size: 0;
     opacity: 0;
+}
+
+.chk-blur{
+    opacity: 0.8;
+}
+
+.chk-icon-div {
+    width: 10%;
+    height: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.chk-icon-div i:first-child {
+    color: #267356;
 }
 
 /*   TO DO ADD BUTTON STYLE   */
@@ -196,7 +216,6 @@
     border: none;
 }
 
-
 .type-text-window-v button{
     font-family: 'Poppins', sans-serif;
     font-family: 16px;
@@ -219,4 +238,89 @@
     position: absolute;
     bottom: 15px;
     right: 20px;
+}
+
+/* Sure to delete window */
+
+.sure-to-delete-i {
+    width: 0;
+    height: 0;
+    opacity: 0;
+}
+
+.sure-to-delete-v {
+    width: 500px;
+    height: 200px;
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    z-index: 1001;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.sure-to-delete-v h3 {
+    font-weight: normal;
+    font-family: 'Poppins', sans-serif;
+    margin: 30px;
+    text-align: center;
+}
+
+.sure-to-delete-v button{
+    font-family: 'Poppins', sans-serif;
+    font-family: 16px;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+.sure-to-delete-v #confirm{
+    background-color: #267356;
+    color: white;
+    position: absolute;
+    bottom: 15px;
+    right: 100px;
+}
+
+.sure-to-delete-v #cancel-delete{
+    background-color: #CECECE;
+    color: black;
+    position: absolute;
+    bottom: 15px;
+    right: 20px;
+}
+/* Restore Button */
+
+.restore-i {
+    font-size: 0;
+    opacity: 0;
+}
+
+.restore-v {
+    background-color: #267356;
+    color: white;
+    font-size: 20px;
+    font-family: 'Ubuntu', sans-serif;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: center;
+    position: absolute;
+    bottom: 25px;
+    left: 25px;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.restore-v p{
+    padding-right: 10px;
+}
+
+.restore-v i{
+    font-size: 25px;
 }
