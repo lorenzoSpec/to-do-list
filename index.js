@@ -27,10 +27,7 @@ console.log(28, twoDAPD);
 /*=======================================   GLOBAL VARIABLES   ==============================================*/
 
 
-let checkIcons;
-if(document.getElementsByClassName('fa-check')){
-    checkIcons = document.getElementsByClassName('fa-check');
-}
+
 
 const checkedItems = [];
 
@@ -51,6 +48,23 @@ const checkedSection = document.getElementById('checked-items');
 
 let darkBgStatus = true;
 
+/*========================================   FUNCTION FOR CREATING ELEMENT  ========================================*/
+
+function createDiv(){
+    return document.createElement('div');
+}
+
+function createP(){
+    return document.createElement('p');
+}
+
+function createTxtNd(text){
+    return document.createTextNode(text);
+}
+
+function createI(){
+    return document.createElement('i');
+}
 
 /*========================================   RENDER ITEMS IN toDoItemsDOM  ========================================*/
 
@@ -80,15 +94,15 @@ function addItemToArr(){
 /* function that create item with the item name and the icons */
 function createItems(textNameItem){
    
-    let cont = document.createElement('div');
-    let textDiv = document.createElement('div');
-    let pEl = document.createElement('p');
-    let text = document.createTextNode(textNameItem);
-    let iconDiv = document.createElement('div');
-    let checkI = document.createElement('i');
-    let trashI = document.createElement('i');
+    let cont = createDiv();
+    let textDiv = createDiv();
+    let pEl = createP();
+    let text = createTxtNd(textNameItem);
+    let iconDiv = createDiv();
+    let checkI = createI();
+    let trashI = createI();
 
-    cont.setAttribute('class', 'item-cont');
+    cont.setAttribute('class', 'item-cont tb');
 
     textDiv.setAttribute('class', 'text-div');
     pEl.setAttribute('class', 'text-p');
@@ -107,8 +121,10 @@ function createItems(textNameItem){
     toDoItemsDOM.appendChild(cont);
 }
 
+
 /*====================================  RENDER ITEMS THAT ARE CHECKED ======================================*/
 
+/* First Onload if there are items that are checked */
 function onloadRenderChk(){
     if(twoDAPD.length > 0){
         showChkSection();
@@ -120,17 +136,20 @@ function onloadRenderChk(){
     } 
 } onloadRenderChk();
 
-function showChkSection(){
-    checkedSection.classList.remove('checked-items-i');
-    checkedSection.classList.add('checked-items-v');
-    
-}
-
 /* Render the checked items */
 function renderChecked(i){
     checkedItemJustNow(i);
     showChkSection();
+    createCkeckedItms(i);
+    //removeOnToDo(i);
 }
+
+/* Show the Check Items Section */
+function showChkSection(){
+    checkedSection.classList.remove('checked-items-i');
+    checkedSection.classList.add('checked-items-v');
+}
+
 
 /* Make the item checked as false */
 function checkedItemJustNow(id){
@@ -138,13 +157,14 @@ function checkedItemJustNow(id){
     storage();
 }
 
+/* create items for check item */
 function createCkeckedItms(chkNameItem){
-    let cont = document.createElement('div');
-    let textDiv = document.createElement('div');
-    let pEl = document.createElement('p');
-    let text = document.createTextNode(chkNameItem);
-    let iconDiv = document.createElement('div');
-    let undo = document.createElement('i');
+    let cont = createDiv();
+    let textDiv = createDiv();
+    let pEl = createP();
+    let text = createTxtNd(chkNameItem);
+    let iconDiv = createDiv();
+    let undo = createI();
 
     cont.setAttribute('class', 'item-cont');
     cont.setAttribute('id', 'chk-blur');
@@ -162,10 +182,25 @@ function createCkeckedItms(chkNameItem){
     cont.appendChild(iconDiv);
 
     checkedSection.appendChild(cont);
-
 }
 
+/*function removeOnToDo(item){
+    let tb = document.getElementsByClassName('tb');
+    for(let i = 0; i < tb.length; i++){
+        if(tb[i].firstChild.firstChild.textContent === item){
+            toDoItemsDOM.removeChild(tb[i]);
+        }
+    }
+}*/
+
+
+
 /* Add event listeners for check icons */
+let checkIcons;
+if(document.getElementsByClassName('fa-check')){
+    checkIcons = document.getElementsByClassName('fa-check');
+}
+
 function eventsForCheck(){
     for(let i = 0; i < checkIcons.length; i++){
         let itemIdentity = checkIcons[i].parentNode.previousSibling.firstChild.textContent;
@@ -173,6 +208,7 @@ function eventsForCheck(){
     }
 };
 eventsForCheck();
+
 
 
 /*=========================================   RESET AND STORAGE ======================================*/
