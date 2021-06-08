@@ -47,6 +47,8 @@ const cancel = document.getElementById('cancel');
 const toDoItemsDOM = document.getElementById('to-do-items');
 const instruction = document.getElementById('instruction');
 
+const checkedSection = document.getElementById('checked-items');
+
 let darkBgStatus = true;
 
 
@@ -89,7 +91,7 @@ function createItems(textNameItem){
     cont.setAttribute('class', 'item-cont');
 
     textDiv.setAttribute('class', 'text-div');
-    pEl.setAttribute('id', 'text-p');
+    pEl.setAttribute('class', 'text-p');
     textDiv.appendChild(pEl);
     pEl.appendChild(text);
 
@@ -107,21 +109,60 @@ function createItems(textNameItem){
 
 /*====================================  RENDER ITEMS THAT ARE CHECKED ======================================*/
 
+function onloadRenderChk(){
+    if(twoDAPD.length > 0){
+        showChkSection();
+        for(let i = 0; i < twoDAPD.length; i++){
+            if(twoDAPD[i][1] === 'false'){
+                createCkeckedItms(twoDAPD[i][0]);
+            }
+        }
+    } 
+} onloadRenderChk();
+
+function showChkSection(){
+    checkedSection.classList.remove('checked-items-i');
+    checkedSection.classList.add('checked-items-v');
+    
+}
 
 /* Render the checked items */
 function renderChecked(i){
     checkedItemJustNow(i);
-    
-
-    const checkedSection = document.getElementById('checked-items');
-    checkedSection.classList.remove('checked-items-i');
-    checkedSection.classList.add('checked-items-v');
+    showChkSection();
 }
 
 /* Make the item checked as false */
 function checkedItemJustNow(id){
     twoDAPD.map(x => x[0] === id? x[1] = 'false' : x[0]);
     storage();
+}
+
+function createCkeckedItms(chkNameItem){
+    let cont = document.createElement('div');
+    let textDiv = document.createElement('div');
+    let pEl = document.createElement('p');
+    let text = document.createTextNode(chkNameItem);
+    let iconDiv = document.createElement('div');
+    let undo = document.createElement('i');
+
+    cont.setAttribute('class', 'item-cont');
+    cont.setAttribute('id', 'chk-blur');
+
+    textDiv.setAttribute('class', 'text-div');
+    pEl.setAttribute('class', 'text-p');
+    textDiv.appendChild(pEl);
+    pEl.appendChild(text);
+
+    iconDiv.setAttribute('class', 'chk-icon-div');
+    undo.setAttribute('class', 'fas fa-undo v');
+    iconDiv.appendChild(undo);
+
+    cont.appendChild(textDiv);
+    cont.appendChild(iconDiv);
+
+    checkedSection.appendChild(cont);
+
 }
 
 /* Add event listeners for check icons */
@@ -146,7 +187,7 @@ function resetFunc(){
 /* Get  and Set data from local storage */
 function storage(){
     localStorage.setItem('toDoList', twoDAPD);
-    localStorage.getItem('toDoList');
+    //localStorage.getItem('toDoList');
 }
 
 /*========================================   KEYBOARD SHORTCUTS  ========================================*/
@@ -205,9 +246,6 @@ function hideDarkBg(){
 }
 
 /*====================================   EVENT LISTENERS  =============================================*/
-
-
-
 document.addEventListener('keypress', rPressedForReset);
 document.addEventListener('keyup', aPressedForAdd);
 typeTextWindow.addEventListener('keyup', enterPressed);

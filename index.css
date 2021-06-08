@@ -67,7 +67,7 @@
     height: 100%;
 }
 
-#text-p {
+.text-p {
     font-size: 18px;
     font-family: 'Poppins', sans-serif;
     opacity: 1;
@@ -109,6 +109,8 @@
     text-align: center;
 }
 
+/* CHECKED ITEMS STYLES  */
+
 .checked-items-v {
     max-width: 800px;
     margin: 100px auto;
@@ -128,6 +130,23 @@
 .checked-items-i h2 {
     font-size: 0;
     opacity: 0;
+}
+
+#chk-blur{
+    opacity: 0.8;
+}
+
+.chk-icon-div {
+    width: 10%;
+    height: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.chk-icon-div i:first-child {
+    color: #267356;
 }
 
 /*   TO DO ADD BUTTON STYLE   */
@@ -195,7 +214,6 @@
     padding: 5px 25px;
     border: none;
 }
-
 
 .type-text-window-v button{
     font-family: 'Poppins', sans-serif;
