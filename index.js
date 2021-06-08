@@ -49,6 +49,13 @@ const instruction = document.getElementById('instruction');
 
 const checkedSection = document.getElementById('checked-items');
 
+const sureToDelete = document.getElementById("sure-to-delete");
+const toDeleteH3 = document.getElementById('to-delete-h3');
+const confirm = document.getElementById('confirm');
+const cancelDelete = document.getElementById('cancel-delete');
+
+const restoreSection = document.getElementById('restore');
+
 let darkBgStatus = true;
 
 /*========================================   FUNCTION FOR CREATING ELEMENT  ========================================*/
@@ -121,6 +128,7 @@ function createItems(textNameItem){
     cont.appendChild(iconDiv);
 
     checkI.addEventListener('click', function(){renderChecked(textNameItem)});
+    trashI.addEventListener('click', function(){deleteItem(textNameItem)});
 
     toDoItemsDOM.appendChild(cont);
 }
@@ -170,8 +178,7 @@ function createCkeckedItms(chkNameItem){
     let iconDiv = createDiv();
     let undo = createI();
 
-    cont.setAttribute('class', 'item-cont');
-    cont.setAttribute('id', 'chk-blur');
+    cont.setAttribute('class', 'item-cont chk-blur');
 
     textDiv.setAttribute('class', 'text-div');
     pEl.setAttribute('class', 'text-p');
@@ -185,7 +192,7 @@ function createCkeckedItms(chkNameItem){
     cont.appendChild(textDiv);
     cont.appendChild(iconDiv);
 
-    //undo.addEventListener('click', x);
+    undo.addEventListener('click', function(){uncheckIt(chkNameItem)});
 
     checkedSection.appendChild(cont);
 }
@@ -199,9 +206,91 @@ function removeOnToDo(item){
     }
 }
 
-/*function uncheckIt(){
+/*=========================================   UNCHECK ITEM ======================================*/
 
-}*/
+let chkedItms = document.getElementsByClassName("chk-blur");
+
+/* Function for unchecking item */
+function uncheckIt(text){
+    uncheckedItem(text);
+    removeOnChkSection(text);
+    createItems(text);
+
+    if(chkedItms.length === 0){
+        hideChkSection();
+    }
+}
+
+/* hide the Check Items Section */
+function hideChkSection(){
+    checkedSection.classList.remove('checked-items-v');
+    checkedSection.classList.add('checked-items-i');
+}
+if(chkedItms.length === 0){
+    hideChkSection();
+}
+
+/* Make the item unchecked as true */
+function uncheckedItem(text){
+    twoDAPD.map(x => x[0] === text ? x[1] = 'true' : x[0]);
+    storage();
+}
+
+/* Remove checked item beacuse they are unchecked */
+function removeOnChkSection(item){
+    let chkBlur = document.getElementsByClassName('chk-blur');
+    for(let i = 0; i < chkBlur.length; i++){
+        if(chkBlur[i].firstChild.firstChild.textContent === item){
+            checkedSection.removeChild(chkBlur[i]);
+        }
+    }
+}
+
+/*=========================================   DELETE ITEM ======================================*/
+
+function deleteItem(itemName){
+    showSureToDelete(itemName);
+}
+
+function dltIt(itemName){
+    let tbd = document.getElementsByClassName('tb');
+    for(let i = 0; i < tbd.length; i++){
+        if(tbd[i].firstChild.firstChild.textContent === itemName){
+            toDoItemsDOM.removeChild(tbd[i]);
+        }
+    }
+}
+
+function showSureToDelete(text){
+    sureToDelete.classList.remove('sure-to-delete-i');
+    sureToDelete.classList.add('sure-to-delete-v');
+    toDeleteH3.textContent = 'Are you sure to delete ' + '"' + text + '"';
+    confirm.addEventListener('click', function(){showRestore(text)});
+    showDarkBg();
+}
+
+function hideSureToDelete(){
+    sureToDelete.classList.remove('sure-to-delete-v');
+    sureToDelete.classList.add('sure-to-delete-i');
+    hideDarkBg();
+}
+
+function showRestore(text){
+    restoreSection.classList.remove('restore-i');
+    restoreSection.classList.add('restore-v');
+    hideSureToDelete();
+    setTimeout(function(){hideRestore(text)}, 3000);
+}
+
+function hideRestore(text){
+    restoreSection.classList.remove('restore-v');
+    restoreSection.classList.add('restore-i');
+    dltIt(text);
+}
+
+
+darkBg.addEventListener('click', hideSureToDelete);
+cancelDelete.addEventListener('click', hideSureToDelete);
 
 /*=========================================   RESET AND STORAGE ======================================*/
 
