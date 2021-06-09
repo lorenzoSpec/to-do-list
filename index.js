@@ -248,6 +248,8 @@ function removeOnChkSection(item){
 
 /*=========================================   DELETE ITEM ======================================*/
 
+let restoreText = '';
+
 function deleteItem(itemName){
     showSureToDelete(itemName);
 }
@@ -259,6 +261,12 @@ function dltIt(itemName){
             toDoItemsDOM.removeChild(tbd[i]);
         }
     }
+    for(let i = 0; i < twoDAPD.length; i++){
+        if(twoDAPD[i][0] === itemName){
+            twoDAPD.splice(i, 1);
+        }
+    }
+    storage();
 }
 
 function showSureToDelete(text){
@@ -279,18 +287,28 @@ function showRestore(text){
     restoreSection.classList.remove('restore-i');
     restoreSection.classList.add('restore-v');
     hideSureToDelete();
-    setTimeout(function(){hideRestore(text)}, 3000);
+    dltIt(text);
+    restoreText =  text;
+    setTimeout(function(){hideRestore()}, 3000);
 }
 
-function hideRestore(text){
+function hideRestore(){
     restoreSection.classList.remove('restore-v');
     restoreSection.classList.add('restore-i');
-    dltIt(text);
 }
-
 
 darkBg.addEventListener('click', hideSureToDelete);
 cancelDelete.addEventListener('click', hideSureToDelete);
+
+/*=========================================  RESTORE  ======================================*/
+
+function restoreItem(text){
+    twoDAPD.push([text, true]);
+    createItems(text);
+    hideRestore();
+    storage();
+}
+restoreSection.addEventListener('click', function(){restoreItem(restoreText)});
 
 /*=========================================   RESET AND STORAGE ======================================*/
 
