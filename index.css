@@ -253,7 +253,7 @@
     width: 500px;
     height: 200px;
     background-color: white;
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -326,56 +326,4 @@
     font-size: 25px;
 }
 
-/* =================================
 
-    MOBILE VIEw
-
-   =================================*/
-
-
-@media (max-width: 400px){
-    /* To do item and checked item */
-    .item-cont {
-        width: 90%;
-    }
-    
-    .text-div {
-        width: 80%;
-    }
-    
-    .icon-div {
-        width: 20%;
-    }
-
-    /* Input Window */
-
-    .type-text-window-v {
-        width: 300px;
-        height: 200px;
-        justify-content: flex-start;
-    }
-    
-    #to-do-item {
-        font-size: 20px;
-        padding: 5px 10px;
-    }
-
-    /* Sure to delete window */
-
-    .sure-to-delete-v {
-        width: 300px;
-        padding: 20px 0;
-        overflow: hidden;
-    }
-
-    /* Restore Button */
-    .restore-v {
-        font-size: 10px;
-        border-radius: 10px;
-        padding: 10px;
-    }
-
-    .restore-v i{
-        font-size: 10px;
-    }
-}

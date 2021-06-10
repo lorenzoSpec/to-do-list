@@ -1,0 +1,139 @@
+/* =================================
+
+    MOBILE VIEw
+
+   =================================*/
+
+
+   @media (max-width: 400px){
+    /* To do item and checked item */
+    .item-cont {
+        width: 90%;
+    }
+    
+    .text-div {
+        width: 80%;
+    }
+    
+    .icon-div {
+        width: 20%;
+    }
+
+    /* Input Window */
+
+    .type-text-window-v {
+        width: 300px;
+        height: 200px;
+        justify-content: flex-start;
+    }
+    
+    #to-do-item {
+        font-size: 20px;
+        padding: 5px 10px;
+    }
+
+    /* Sure to delete window */
+
+    .sure-to-delete-v {
+        width: 300px;
+        padding: 20px 0;
+        overflow: hidden;
+    }
+
+    /* Restore Button */
+    .restore-v {
+        font-size: 15px;
+        border-radius: 10px;
+        padding: 15px;
+    }
+
+    .restore-v i{
+        font-size: 15px;
+    }
+}
+
+/* =================================
+
+    TABLET VIEw
+
+   =================================*/
+
+
+   @media (max-width: 900px) and (min-width: 401px) {
+    /* To do item and checked item */
+    .item-cont {
+        width: 95%;
+    }
+    
+    .text-div {
+        width: 85%;
+    }
+    
+    .icon-div {
+        width: 15%;
+    }
+
+    /* Input Window */
+
+    .type-text-window-v {
+        width: 390px;
+        height: 200px;
+        justify-content: flex-start;
+    }
+    
+    #to-do-item {
+        font-size: 20px;
+        padding: 5px 10px;
+    }
+
+    /* Sure to delete window */
+
+    .sure-to-delete-v {
+        width: 390px;
+        padding: 20px 0;
+        overflow: hidden;
+    }
+
+    /* Restore Button */
+    .restore-v {
+        font-size: 15px;
+        border-radius: 10px;
+        padding: 15px;
+    }
+
+    .restore-v i{
+        font-size: 20px;
+    }
+}
+
+/* =================================
+
+    4K VIEw
+
+   =================================*/
+
+
+   @media (min-width: 1441px) {
+
+    /*   HEADER STYLES   */
+
+    #header {
+        width: 1000px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    #add-btn {
+        right: 50%;
+        transform: translateX(500px);
+    }
+
+    /* Restore Button */
+
+    .restore-v {
+        left: 50%;
+        transform: translateX(-500px);
+        border-radius: 10px;
+        padding: 15px;
+    }
+}
