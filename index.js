@@ -319,10 +319,6 @@ function restoreItem(text){
 }
 restoreSection.addEventListener('click', function(){restoreItem(restoreText)});
 
-/*=========================================  RESET  ======================================*/
-
-
-
 /*=========================================   RESET AND STORAGE ======================================*/
 
 /* Reset button to delete the data in local storage */
