@@ -43,6 +43,12 @@
     margin-right: 20px;
     padding: 6px 17px;
     border: none;
+    transition: opacity 0.1s linear;
+}
+
+#header button:hover {
+    opacity: 0.7;
+    cursor: pointer;
 }
 
 /*   TO DO MAIN CONTENT STYLES   */
@@ -166,6 +172,12 @@
     justify-content: center;
     border-radius: 50%;
     border: none;
+    transition: opacity 0.1s linear;
+}
+
+#add-btn:hover {
+    opacity: 0.7;
+    cursor: pointer;
 }
 
 /*   UTILITIES   */
@@ -185,6 +197,10 @@
     opacity: 0.5;
     z-index: 1000;
     display: block;
+}
+
+.dark-bg-v:hover {
+    cursor: pointer;
 }
 
 /*Type Text/Item Name Window*/
@@ -231,6 +247,12 @@
     position: absolute;
     bottom: 15px;
     right: 100px;
+    transition: opacity 0.1s linear;
+}
+
+.type-text-window-v #add:hover {
+    opacity: 0.7;
+    cursor: pointer;
 }
 
 .type-text-window-v #cancel{
@@ -239,6 +261,12 @@
     position: absolute;
     bottom: 15px;
     right: 20px;
+    transition: opacity 0.1s linear;
+}
+
+.type-text-window-v #cancel:hover {
+    opacity: 0.7;
+    cursor: pointer;
 }
 
 /* Sure to delete window */
@@ -286,6 +314,12 @@
     position: absolute;
     bottom: 15px;
     right: 100px;
+    transition: opacity 0.1s linear;
+}
+
+.sure-to-delete-v #confirm:hover {
+    opacity: 0.7;
+    cursor: pointer;
 }
 
 .sure-to-delete-v #cancel-delete{
@@ -294,7 +328,15 @@
     position: absolute;
     bottom: 15px;
     right: 20px;
+    transition: opacity 0.1s linear;
 }
+
+.sure-to-delete-v #cancel-delete:hover{
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+
 /* Restore Button */
 
 .restore-i {
@@ -316,6 +358,12 @@
     left: 25px;
     border-radius: 10px;
     padding: 15px;
+    transition: opacity 0.1s linear;
+}
+
+.restore-v:hover {
+    opacity: 0.8;
+    cursor: pointer;
 }
 
 .restore-v p{
@@ -326,4 +374,10 @@
     font-size: 25px;
 }
 
+.fas{
+    transition: opacity 0.1s linear;
+}
 
+.fas:hover {
+    cursor: pointer;
+}
