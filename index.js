@@ -101,6 +101,9 @@ function addItemToArr(){
 }
 
 /* function that create item with the item name and the icons */
+
+let clikedStat = false;
+
 function createItems(textNameItem){
    
     let cont = createDiv();
@@ -126,10 +129,9 @@ function createItems(textNameItem){
 
     cont.appendChild(textDiv);
     cont.appendChild(iconDiv);
-
+    
     checkI.addEventListener('click', function(){renderChecked(textNameItem)});
     trashI.addEventListener('click', function(){deleteItem(textNameItem)});
-
     toDoItemsDOM.appendChild(cont);
 }
 
@@ -251,7 +253,7 @@ function removeOnChkSection(item){
 let restoreText = '';
 
 function deleteItem(itemName){
-    showSureToDelete(itemName);
+    showSureToDelete(itemName, 'delete');
 }
 
 function dltIt(itemName){
@@ -269,11 +271,18 @@ function dltIt(itemName){
     storage();
 }
 
-function showSureToDelete(text){
+function showSureToDelete(text, action){
+
+    if(action  === 'delete'){
+        confirm.addEventListener('click', function(){showRestore(text)});
+    } else if(action === 'Reset'){
+        confirm.addEventListener('click', resetIt);
+    }
+
     sureToDelete.classList.remove('sure-to-delete-i');
     sureToDelete.classList.add('sure-to-delete-v');
-    toDeleteH3.textContent = 'Are you sure to delete ' + '"' + text + '"';
-    confirm.addEventListener('click', function(){showRestore(text)});
+    toDeleteH3.textContent = 'Are you sure you want to ' + action + ' "' + text + '"';
+    
     showDarkBg();
 }
 
@@ -310,10 +319,18 @@ function restoreItem(text){
 }
 restoreSection.addEventListener('click', function(){restoreItem(restoreText)});
 
+/*=========================================  RESET  ======================================*/
+
+
+
 /*=========================================   RESET AND STORAGE ======================================*/
 
 /* Reset button to delete the data in local storage */
 function resetFunc(){
+    showSureToDelete('Now', 'Reset');
+}
+
+function resetIt(){
     showDarkBg();
     localStorage.setItem('toDoList', '');
     location.reload();
