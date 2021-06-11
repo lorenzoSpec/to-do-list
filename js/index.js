@@ -363,6 +363,53 @@ function rPressedForReset(e){
 }
 
 
+/*========================================  SHOW TOOLTIPS  ========================================*/
+
+const tltpAdd = document.getElementById('tltp-add');
+const tltpReset = document.getElementById('tltp-reset');
+
+function shwTooltip(el){
+    if(el.id === "add-btn"){
+        showTltpAdd();
+    } else if (el.id === "reset-btn"){
+        showTltpRese();
+    }
+}
+
+function hideTooltip(el){
+    if(el.id === "add-btn"){
+        hideTltpAdd();
+    } else if(el.id === "reset-btn"){
+        hideTltpReset();
+    }
+}
+
+function showTltpAdd(){
+    tltpAdd.classList.remove('tltp-add-i');
+    tltpAdd.classList.add('tltp-add-v');
+}
+
+function hideTltpAdd(){
+    tltpAdd.classList.remove('tltp-add-v');
+    tltpAdd.classList.add('tltp-add-i');
+}
+
+function showTltpRese(){
+    tltpReset.classList.remove('tltp-reset-i');
+    tltpReset.classList.add('tltp-reset-v');
+}
+
+function hideTltpReset(){
+    tltpReset.classList.remove('tltp-reset-v');
+    tltpReset.classList.add('tltp-reset-i');
+}
+
+addBtn.addEventListener('mouseover', function(){shwTooltip(this)});
+resetBtn.addEventListener('mouseover', function(){shwTooltip(this)});
+
+resetBtn.addEventListener('mouseout', function(){hideTooltip(this)});
+addBtn.addEventListener('mouseout', function(){hideTooltip(this)});
+
 /*========================================   SHOW AND HIDE WINDOWS  ========================================*/
 
 

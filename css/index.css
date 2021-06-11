@@ -18,7 +18,7 @@
     left: 0;
     display: grid;
     grid-template-columns: 80% 20%;
-    z-index: 1000000000;
+    z-index: 1000;
 }
 
 #header h1{
@@ -175,7 +175,8 @@
     transition: opacity 0.1s linear;
 }
 
-#add-btn:hover {
+
+#add-btn:hover{
     opacity: 0.7;
     cursor: pointer;
 }
