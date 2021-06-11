@@ -1,0 +1,42 @@
+.tltp-add-i {
+    font-size: 0;
+    padding: 0;
+    opacity: 0;
+}
+
+.tltp-add-v {
+    background-color: black;
+    color: white;
+    font-size: 12px;
+    font-family: "Ubuntu", sans-serif;
+    padding: 5px;
+    border-radius: 5px;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    transform: translate(10px, -55px);
+    opacity: 0.8;
+    z-index: 100;
+    transition: all 0.1s 1s linear;
+}
+
+.tltp-reset-i {
+    font-size: 0;
+    padding: 0;
+    opacity: 0;
+}
+
+.tltp-reset-v {
+    background-color: black;
+    color: white;
+    font-size: 12px;
+    font-family: "Ubuntu", sans-serif;
+    padding: 5px;
+    border-radius: 5px;
+    position: fixed;
+    top: 50px;
+    right: 10px;
+    opacity: 0.8;
+    z-index: 1001;
+    transition: all 0.1s 1s linear;
+}

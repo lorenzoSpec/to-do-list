@@ -50,6 +50,14 @@
     .restore-v i{
         font-size: 15px;
     }
+
+    #tltp-add {
+        visibility: hidden;
+    }
+
+    #tltp-reset {
+        visibility: hidden;
+    }
 }
 
 /* =================================
@@ -103,6 +111,14 @@
 
     .restore-v i{
         font-size: 20px;
+    }
+
+    #tltp-add {
+        visibility: hidden;
+    }
+
+    #tltp-reset {
+        visibility: hidden;
     }
 }
 
