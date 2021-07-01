@@ -55,6 +55,7 @@
 #to-do-items{
     max-width: 800px;
     margin: 100px auto;
+    margin-bottom: 0;
 }
 
 .item-cont {
@@ -157,26 +158,44 @@
     color: #267356;
 }
 
-/*   TO DO ADD BUTTON STYLE   */
-#add-btn {
-    width: 50px;
-    height: 50px;
+/*   TYPE TO DO   */
+#type-to-do {
+    max-width: 800px;
+    margin: auto;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#to-do-item {
+    width: 700px;
+    height: 47px;
+    background-color: #ebe9e9;
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    padding: 10px 20px;
+    border: 1px solid #267356;
+    outline: #267356;
+    border-radius: 5px;
+}
+
+#type-to-do-action button{
+    height: 40px;
+    font-family: 'Poppins', sans-serif;
+    font-family: 16px;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 25px;
+}
+
+#add{
     background-color: #267356;
     color: white;
-    font-size: 30px;
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    border: none;
     transition: opacity 0.1s linear;
 }
 
-
-#add-btn:hover{
+#add:hover {
     opacity: 0.7;
     cursor: pointer;
 }
@@ -201,72 +220,6 @@
 }
 
 .dark-bg-v:hover {
-    cursor: pointer;
-}
-
-/*Type Text/Item Name Window*/
-.type-text-window-v {
-    width: 500px;
-    height: 200px;
-    background-color: white;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 10px;
-    z-index: 1001;
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
-}
-
-.type-text-window-v h3{
-    font-weight: normal;
-    font-family: 'Poppins';
-    margin: 30px;
-}
-
-#to-do-item {
-    background-color: #CECECE;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 25px;
-    padding: 5px 25px;
-    border: none;
-}
-
-.type-text-window-v button{
-    font-family: 'Poppins', sans-serif;
-    font-family: 16px;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 10px;
-}
-
-.type-text-window-v #add{
-    background-color: #267356;
-    color: white;
-    position: absolute;
-    bottom: 15px;
-    right: 100px;
-    transition: opacity 0.1s linear;
-}
-
-.type-text-window-v #add:hover {
-    opacity: 0.7;
-    cursor: pointer;
-}
-
-.type-text-window-v #cancel{
-    background-color: #CECECE;
-    color: black;
-    position: absolute;
-    bottom: 15px;
-    right: 20px;
-    transition: opacity 0.1s linear;
-}
-
-.type-text-window-v #cancel:hover {
-    opacity: 0.7;
     cursor: pointer;
 }
 
