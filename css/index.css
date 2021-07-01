@@ -55,6 +55,7 @@
 #to-do-items{
     max-width: 800px;
     margin: 100px auto;
+    margin-bottom: 0;
 }
 
 .item-cont {
@@ -168,13 +169,14 @@
 }
 
 #to-do-item {
-    width: 260%;
+    width: 700px;
     height: 47px;
     background-color: #ebe9e9;
     font-family: 'Poppins', sans-serif;
     font-size: 18px;
     padding: 10px 20px;
-    border: none;
+    border: 1px solid #267356;
+    outline: #267356;
     border-radius: 5px;
 }
 
