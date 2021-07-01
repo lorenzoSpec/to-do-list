@@ -7,33 +7,41 @@
     <title>To Do List | Make your day productive and awesome</title>
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/responsive.css">
-    <link rel="stylesheet" href="css/tooltip.css">
     <script src="https://kit.fontawesome.com/e93a3a423a.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header id='header'>
         <h1>To Do List</h1>
-        <button id='reset-btn'>Reset</button>
+        <button id='reset-btn' title="Reset To Do (R)">Reset</button>
     </header>
     <section id='main-content'>
         <section id='to-do-items'>
-            <p id='instruction'>Add Item...</p>
+            
         </section>
+        <div id="type-to-do">
+            <div id="type-to-do-input">
+                <input type="text" name="to-do-item" id="to-do-item"/>
+            </div>
+            <div id="type-to-do-action">
+                <button id='add'>Add</button>
+                <button id='cancel'>Cancel</button>
+            </div>
+        </div>
         <section id='checked-items' class="checked-items-i">
             <h2>Finished Item</h2>
         </section>
-        <button id='add-btn'>
+        <!--<button id='add-btn'>
             <i class="fas fa-plus"></i>
-        </button>
+        </button>--->
     </section>
     <section id='utilities'>
         <section id="dark-bg" class='dark-bg-i'></section>
-        <section id='type-text-window' class="type-text-window-i">
+        <!--<section id='type-text-window' class="type-text-window-i">
             <h3>Type an item</h3>
             <input type="text" name="to-do-item" id="to-do-item"/>
             <button id='add'>Add</button>
             <button id='cancel'>Cancel</button>
-        </section>
+        </section>-->
         <section id='sure-to-delete' class='sure-to-delete-i'>
             <h3 id='to-delete-h3'></h3>
             <button id='confirm'>Confirm</button>
@@ -44,14 +52,6 @@
             <i class="fas fa-trash-restore"></i>
         </section>
     </section>
-    <div id="tooltip">
-        <div id="tltp-add" class="tltp-add-i">
-            Add Item (A)
-        </div>
-        <div id="tltp-reset" class="tltp-reset-i">
-            Reset To Do (R)
-        </div>
-    </div>
     <script src="js/index.js"></script>
 </body>
 </html>

@@ -39,13 +39,12 @@ const addBtn = document.getElementById('add-btn');
 const resetBtn = document.getElementById('reset-btn');
 
 const darkBg = document.getElementById('dark-bg');
-const typeTextWindow = document.getElementById('type-text-window');
+//const typeTextWindow = document.getElementById('type-text-window');
 const toDoInput = document.getElementById('to-do-item');
 const add = document.getElementById('add');
 const cancel = document.getElementById('cancel');
 
 const toDoItemsDOM = document.getElementById('to-do-items');
-const instruction = document.getElementById('instruction');
 
 const checkedSection = document.getElementById('checked-items');
 
@@ -95,7 +94,6 @@ function addItemToArr(){
     let intVal = toDoInput.value;
     twoDAPD.push([intVal, true]);
 
-    hideTypeWindow();
     storage();
     createItems(intVal);
 }
@@ -349,11 +347,11 @@ function enterPressed(e){
 }
 
 /* Shortcut to show typewindow with A Key */
-function aPressedForAdd(e){
+/*function aPressedForAdd(e){
     if(e.code === 'KeyA'){
         showTypeWindow();
     }
-}
+}*/
 
 /* Shortcut to reset the items with R Key */
 function rPressedForReset(e){
@@ -404,29 +402,28 @@ function hideTltpReset(){
     tltpReset.classList.add('tltp-reset-i');
 }
 
-addBtn.addEventListener('mouseover', function(){shwTooltip(this)});
+//addBtn.addEventListener('mouseover', function(){shwTooltip(this)});
 resetBtn.addEventListener('mouseover', function(){shwTooltip(this)});
 
 resetBtn.addEventListener('mouseout', function(){hideTooltip(this)});
-addBtn.addEventListener('mouseout', function(){hideTooltip(this)});
+//addBtn.addEventListener('mouseout', function(){hideTooltip(this)});
 
 /*========================================   SHOW AND HIDE WINDOWS  ========================================*/
 
 
 /* Show the element that that popping up when plus icon is clicked  */
-function showTypeWindow(){
+/*function showTypeWindow(){
     typeTextWindow.classList.add('type-text-window-v');
     toDoInput.focus();
     showDarkBg();
 
-}
+}*/
 
 /* Hide the element that that popping up when plus icon is clicked  */
-function hideTypeWindow(){
-    typeTextWindow.classList.remove('type-text-window-v');
+/*function hideTypeWindow(){
+    //typeTextWindow.classList.remove('type-text-window-v');
     toDoInput.value = "";
-    hideDarkBg();
-}
+}*/
 
 /* Show the element that darken the screen for windows  */
 function showDarkBg(){
@@ -442,10 +439,10 @@ function hideDarkBg(){
 
 /*====================================   EVENT LISTENERS  =============================================*/
 document.addEventListener('keypress', rPressedForReset);
-document.addEventListener('keyup', aPressedForAdd);
-typeTextWindow.addEventListener('keyup', enterPressed);
+//document.addEventListener('keyup', aPressedForAdd);
+//typeTextWindow.addEventListener('keyup', enterPressed);
 resetBtn.addEventListener('click', resetFunc);
-addBtn.addEventListener('click', showTypeWindow);
+//addBtn.addEventListener('click', showTypeWindow);
 darkBg.addEventListener('click', hideTypeWindow);
 cancel.addEventListener('click', hideTypeWindow);
 add.addEventListener('click', addItemToArr);
