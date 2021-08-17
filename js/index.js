@@ -344,13 +344,6 @@ function enterPressed(e){
     }
 }
 
-/* Shortcut to reset the items with R Key */
-function rPressedForReset(e){
-    if(e.code === 'KeyR' && darkBgStatus){
-        resetFunc();
-    }
-}
-
 /*========================================   SHOW AND HIDE WINDOWS  ========================================*/
 
 /* Show the element that darken the screen for windows  */
@@ -366,7 +359,6 @@ function hideDarkBg(){
 }
 
 /*====================================   EVENT LISTENERS  =============================================*/
-document.addEventListener('keypress', rPressedForReset);
 document.addEventListener('keyup', enterPressed);
 resetBtn.addEventListener('click', resetFunc);
 add.addEventListener('click', addItemToArr);
